@@ -80,7 +80,7 @@ const Team = () => {
       name: "EAZY",
       role: "COMMUNITY LEAD",
       bio: "Building and nurturing the web3unilag community, fostering engagement and collaboration among members.",
-      image: "/api/placeholder/200/200",
+      image: "/excos/Eazy.jpg",
       email: "eazy@web3unilag.com",
       social: {
         x: "https://x.com/eazy",
