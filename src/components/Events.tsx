@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Play, MapPin, Users } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 type EventFrameProps = {
   date: string;
@@ -9,9 +8,10 @@ type EventFrameProps = {
   organizer: string;
   location: string;
   time: string;
+  event_url: string;
 };
 
-const EventFrame = ({ date, month, title, organizer, location, time }: EventFrameProps) => {
+const EventFrame = ({ date, month, title, organizer, location, time, event_url }: EventFrameProps) => {
   return (
     <div className="flex flex-col md:flex-row items-center md:items-center justify-between p-4 border border-primary rounded-lg gap-6">
       {/* Date and Month */}
@@ -44,9 +44,11 @@ const EventFrame = ({ date, month, title, organizer, location, time }: EventFram
 
       {/* Button */}
       <div className="w-full md:w-auto flex justify-center md:justify-end">
-        <Button className="bg-primary text-lg md:text-xl hover:bg-blue-700 text-white px-5 md:px-7 rounded-none py-4 md:py-7 w-full md:w-auto">
-          Register
-        </Button>
+        <a href={event_url}>
+          <Button className="bg-primary text-lg md:text-xl hover:bg-blue-700 text-white px-5 md:px-7 rounded-none py-4 md:py-7 w-full md:w-auto">
+            Register
+          </Button>
+        </a>
       </div>
     </div>
   );
@@ -54,6 +56,10 @@ const EventFrame = ({ date, month, title, organizer, location, time }: EventFram
 
 
 export function Events() {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: framesRef, isInView: framesInView } = useScrollAnimation();
+  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
+
   const events = [
     {
       date: "08",
@@ -87,45 +93,51 @@ export function Events() {
   const eventFrames = [
     {
       date: "08",
-      month: "June",
-      title: "Web3 Scaling event meeting",
+      month: "NOV",
+      title: "BIU Web3 Conference",
       organizer: "Organized by Web3 Unilag",
-      location: "Hall 3",
-      time: "9:00AM - 11:30AM"
-    },
-    {
-      date: "15",
-      month: "July",
-      title: "Blockchain Developer Workshop",
-      organizer: "Organized by Web3 Unilag",
-      location: "Conference Room B",
-      time: "2:00PM - 5:00PM"
+      location: "Unilag, Lagos",
+      time: "9:00AM - 5:00PM",
+      event_url: "https://lu.ma/"
     }
   ];
 
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center">Events</h2>
+        <h2
+          ref={headerRef}
+          className={`text-3xl font-bold mb-8 text-center animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+        >
+          Events
+        </h2>
 
-        <div className="flex flex-col gap-4 mb-8">
+        <div
+          ref={framesRef}
+          className={`flex flex-col gap-4 mb-8 stagger-children ${framesInView ? 'in-view' : ''}`}
+        >
           {/* Dynamic Event Frames */}
           {eventFrames.map((frame, index) => (
-            <EventFrame
-              key={index}
-              date={frame.date}
-              month={frame.month}
-              title={frame.title}
-              organizer={frame.organizer}
-              location={frame.location}
-              time={frame.time}
-            />
+            <div key={index} className="hover-lift">
+              <EventFrame
+                date={frame.date}
+                month={frame.month}
+                title={frame.title}
+                organizer={frame.organizer}
+                location={frame.location}
+                time={frame.time}
+                event_url={frame.event_url}
+              />
+            </div>
           ))}
         </div>
         {/* Main Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div
+          ref={gridRef}
+          className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+        >
           {events.map((event, index) => (
-            <div key={index} className="rounded-2xl h-[300px] p-4 flex flex-col justify-end overflow-hidden text-white hover:shadow-lg transition-all duration-300 group" style={{ background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)' }}>
+            <div key={index} className="rounded-2xl h-[300px] p-4 flex flex-col justify-end overflow-hidden text-white hover:shadow-lg hover-lift transition-all duration-300 group" style={{ background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)' }}>
               {/* Content */}
               <div className="flex justify-between">
                 <div className="">

@@ -2,8 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { useState } from "react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const Programs = () => {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
   const [showAll, setShowAll] = useState(false);
   const programs = [
     {
@@ -51,7 +54,10 @@ const Programs = () => {
   return (
     <section className="pb-20 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Programs and Projects
           </h2>
@@ -61,9 +67,12 @@ const Programs = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div 
+          ref={gridRef}
+          className={`grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+        >
           {(showAll ? programs : programs.slice(0, 3)).map((program, index) => (
-            <Card key={index} className="overflow-hidden cursor-pointer bg-transparent group hover:shadow-2xl transition-all duration-500 border-0 ">
+            <Card key={index} className="overflow-hidden cursor-pointer bg-transparent group hover:shadow-2xl hover-lift transition-all duration-500 border-0 ">
               <div className="relative h-64 overflow-hidden">
                 <img 
                   src={program.image} 

@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Mission from "@/components/Mission";
 import About from "@/components/About";
+import Partners from "@/components/Partners";
 import Programs from "@/components/Programs";
 import Events from "@/components/Events";
 import Team from "@/components/Team";
@@ -12,7 +13,7 @@ import FinalCTA from "@/components/finalCTA";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Navigation />
       <div id="home">
         <Hero />
@@ -21,6 +22,7 @@ const Index = () => {
       <div id="about">
         <About />
       </div>
+      <Partners />
       <div id="programs">
         <Programs />
       </div>

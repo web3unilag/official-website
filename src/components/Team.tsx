@@ -1,54 +1,175 @@
 import { Card } from "@/components/ui/card";
-import { Linkedin, Twitter, Github, X } from "lucide-react";
+import { Mail, MessageCircle, Send, X } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { useState } from "react";
 
 const Team = () => {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
+  const [copiedMessages, setCopiedMessages] = useState<{[key: string]: string}>({});
+
+  const copyToClipboard = async (text: string, platform: string, memberName: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      const messageKey = `${memberName}-${platform}`;
+      setCopiedMessages(prev => ({
+        ...prev,
+        [messageKey]: `${platform} username copied!`
+      }));
+      setTimeout(() => {
+        setCopiedMessages(prev => {
+          const newMessages = { ...prev };
+          delete newMessages[messageKey];
+          return newMessages;
+        });
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
   const teamMembers = [
     {
-      name: "ADUNNI",
-      role: "BLOCKCHAIN DEVELOPER",
-      bio: "Full-stack blockchain developer with expertise in Solidity and DeFi protocols. Passionate about building scalable Web3 solutions.",
-      image: "/lovable-uploads/8f028475-0b57-419b-8492-aedeadda6176.png",
-      email: "adunni@web3unilag.com",
+      name: "SEUN",
+      role: "PRESIDENT",
+      bio: "Leading web3unilag with vision and dedication to advance blockchain education and adoption across Lagos universities.",
+      image: "/excos/Seun_president.jpg",
+      email: "seun@web3unilag.com",
       social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#"
+        x: "https://x.com/olokoji",
+        discord: "olokoji",
+        telegram: "olokoji"
       }
     },
     {
-      name: "KEHINDE",
-      role: "COMMUNITY MANAGER",
-      bio: "Experienced community builder focused on growing blockchain adoption across Lagos universities and fostering innovation.",
-      image: "/lovable-uploads/8f028475-0b57-419b-8492-aedeadda6176.png",
-      email: "kehinde@web3unilag.com",
+      name: "YINUSA",
+      role: "VICE PRESIDENT",
+      bio: "Driving web3 initiatives and fostering innovation within the university blockchain community at web3unilag.",
+      image: "/excos/Abdullahi_VP.jpg",
+      email: "yinusaabdullahi12@gmail.com",
       social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#"
+        x: "https://x.com/Yinusaweb3",
+        discord: "Yinusaweb3",
+        telegram: "Yinusaweb3"
       }
     },
     {
-      name: "EMEKA",
+      name: "BORME",
+      role: "GENERAL SECRETARY",
+      bio: "Managing organizational affairs and ensuring smooth operations of web3unilag activities and communications.",
+      image: "/excos/Borme_Gen_sec.jpg",
+      email: "borme@web3unilag.com",
+      social: {
+        x: "https://x.com/0x_borme?s=21",
+        discord: "https://discord.com/invite/Q3NaQm2A",
+        telegram: "osaborme"
+      }
+    },
+    {
+      name: "TAIWO",
       role: "TECHNICAL LEAD",
-      bio: "Senior software engineer with 8+ years experience in distributed systems and blockchain architecture design.",
-      image: "/lovable-uploads/a5fa2a11-b7c7-4dd3-9bbd-3618f915ab35.png",
-      email: "emeke@web3unilag.com",
+      bio: "Leading technical development and blockchain architecture, ensuring high-quality web3 solutions and educational content.",
+      image: "/excos/Taiwo_Technical_lead.jpg",
+      email: "taiwotriumphant@gmail.com",
       social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#"
+        x: "https://x.com/dumbdevs",
+        discord: "dumbdevs.apt",
+        telegram: "dumbdevs"
       }
     },
     {
-      name: "FUNMI",
-      role: "EDUCATION DIRECTOR",
-      bio: "Curriculum developer and educator specializing in making complex blockchain concepts accessible to students and professionals.",
-      image: "/lovable-uploads/e5eecc6c-849c-46d6-8b20-c73646e9a5c0.png",
-      email: "funmi@web3unilag.com",
+      name: "EAZY",
+      role: "COMMUNITY LEAD",
+      bio: "Building and nurturing the web3unilag community, fostering engagement and collaboration among members.",
+      image: "/api/placeholder/200/200",
+      email: "eazy@web3unilag.com",
       social: {
-        linkedin: "#",
-        twitter: "#",
-        github: "#"
+        x: "https://x.com/eazy",
+        discord: "eazy",
+        telegram: "eazy"
+      }
+    },
+    {
+      name: "MASTER ZEKS",
+      role: "BD LEAD",
+      bio: "Driving business development initiatives and partnerships to expand web3unilag's reach and impact.",
+      image: "/excos/Zeks_BD_lead.jpg",
+      email: "Masterzeks316@gmail.com",
+      social: {
+        x: "https://x.com/M_zekks",
+        discord: "El_matador5122",
+        telegram: "Master_zeks"
+      }
+    },
+    {
+      name: "JUSTICE",
+      role: "COMMUNICATIONS LEAD",
+      bio: "Technical Writer, Communications Lead @web3unilag, DeSci Advocate. Managing strategic communications at web3unilag",
+      image: "/excos/Justice_social_media.jpg",
+      email: "justice@web3unilag.com",
+      social: {
+        x: "https://x.com/0x1_siri",
+        discord: "https://discord.com/channels/@0x1_siri",
+        telegram: "justicesiri"
+      }
+    },
+    {
+      name: "TOBI",
+      role: "SOCIAL MEDIA LEAD",
+      bio: "Co-leading social media efforts to amplify web3unilag's message and engage with the broader blockchain community.",
+      image: "/excos/Tobi_social_media.jpg",
+      email: "tobi@web3unilag.com",
+      social: {
+        x: "https://x.com/tobi",
+        discord: "tobi",
+        telegram: "tobi"
+      }
+    },
+    {
+      name: "MBKBOSS",
+      role: "CONTENT LEAD",
+      bio: "Creating compelling content that educates and inspires the community about blockchain technology and web3 innovations.",
+      image: "/excos/Mbkboss_content_lead.jpg",
+      email: "olamidemubarak43@gmail.com",
+      social: {
+        x: "https://x.com/Mbkbosss",
+        discord: "Mbkbosss",
+        telegram: "Mbkbosss"
+      }
+    },
+    {
+      name: "KERO",
+      role: "CONTENT LEAD",
+      bio: "Co-leading content creation efforts to deliver high-quality educational materials and community resources.",
+      image: "/excos/Kero_content_lead.jpg",
+      email: "kero@web3unilag.com",
+      social: {
+        x: "https://x.com/_theadaku",
+        discord: "theadaku",
+        telegram: "theadaku"
+      }
+    },
+    {
+      name: "TITI",
+      role: "WELFARE LEAD",
+      bio: "Ensuring the well-being and support of all web3unilag members, creating an inclusive and caring community environment.",
+      image: "/excos/Titi_welfare_lead.jpg",
+      email: "titi@web3unilag.com",
+      social: {
+        x: "https://x.com/titi",
+        discord: "titi",
+        telegram: "titi"
+      }
+    },
+    {
+      name: "GRACE",
+      role: "DESIGN LEAD",
+      bio: "Leading design initiatives and creating visually compelling materials that represent web3unilag's brand and mission.",
+      image: "/excos/Grace_design_lead.jpg",
+      email: "grace@web3unilag.com",
+      social: {
+        x: "https://x.com/grace",
+        discord: "grace",
+        telegram: "grace"
       }
     }
   ];
@@ -56,19 +177,25 @@ const Team = () => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div
+          ref={headerRef}
+          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Meet our extraordinary team
           </h2>
           <p className="text-md text-muted-foreground max-w-3xl mx-auto">
             Our diverse team of blockchain experts, educators, and community builders
-            are dedicated to advancing Web3 adoption across Lagos.
+            are dedicated to advancing web3 adoption across Lagos.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div
+          ref={gridRef}
+          className={`grid grid-cols-1 md:grid-cols-2 gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+        >
           {teamMembers.map((member, index) => (
-            <Card key={index} className="p-4 sm:p-6 text-center hover:shadow-xl transition-all duration-300 group border-2 border-[#1954C6] bg-transparent">
+            <Card key={index} className="p-4 sm:p-6 text-center hover:shadow-xl hover-lift transition-all duration-300 group border-2 border-[#1954C6] bg-transparent">
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6">
                 <div className="flex justify-center sm:justify-start">
                   <img
@@ -82,6 +209,9 @@ const Team = () => {
                   <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 capitalize tracking-wide">
                     {member.name.toLowerCase()}
                   </h3>
+                  <p className="text-[#1954C6] font-semibold text-sm mb-3 uppercase tracking-wide">
+                    {member.role}
+                  </p>
 
                   <p className="text-white/60 font-medium text-sm leading-relaxed mb-4 sm:mb-6">
                     {member.bio}
@@ -90,51 +220,42 @@ const Team = () => {
               </div>
 
 
-              <div className="flex flex-col sm:flex-row w-full items-center gap-y-4 sm:gap-x-4">
-                <div className="flex justify-center gap-x-4 sm:justify-between w-full sm:w-52">
-                  <a
-                    href={member.social.twitter}
-                    className="bg-[#1C1C1C] flex justify-center items-center w-12 h-12 rounded-lg hover:bg-gray-700 transition-colors duration-300"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9.4377 27.1874C20.7557 27.1874 26.9479 17.8083 26.9479 9.67727C26.9479 9.41359 26.942 9.14406 26.9303 8.88039C28.1348 8.00927 29.1744 6.93026 30 5.69406C28.8782 6.19319 27.6871 6.51917 26.4674 6.66086C27.7516 5.89107 28.7132 4.68178 29.1738 3.25715C27.9657 3.97314 26.6445 4.4782 25.2668 4.7507C24.3385 3.76439 23.1112 3.11133 21.7746 2.8925C20.438 2.67367 19.0665 2.90125 17.8722 3.54006C16.6779 4.17887 15.7273 5.19332 15.1673 6.42658C14.6074 7.65984 14.4693 9.04321 14.7744 10.3628C12.3281 10.2401 9.93492 9.60457 7.74998 8.49756C5.56503 7.39055 3.63712 5.83674 2.09121 3.93684C1.3055 5.29149 1.06507 6.8945 1.41879 8.42005C1.77251 9.94561 2.69383 11.2792 3.99551 12.1499C3.01829 12.1189 2.06247 11.8558 1.20703 11.3823V11.4585C1.20616 12.8801 1.69762 14.2582 2.59789 15.3584C3.49815 16.4586 4.75165 17.2131 6.14531 17.4937C5.24007 17.7414 4.28998 17.7774 3.36855 17.5991C3.76182 18.8217 4.52697 19.8911 5.55721 20.6579C6.58746 21.4247 7.8314 21.8507 9.11543 21.8765C6.93553 23.5888 4.24272 24.5176 1.4707 24.5132C0.979109 24.5125 0.487999 24.4823 0 24.423C2.81607 26.2296 6.09191 27.1892 9.4377 27.1874Z" fill="white" />
-                    </svg>
-                  </a>
-                  <a
-                    href={member.social.github}
-                    className="bg-[#1C1C1C] flex justify-center items-center w-12 h-12 rounded-lg hover:bg-gray-700 transition-colors duration-300"
-                  >
-                    <svg width="20" height="16" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M25.3963 2.19434C23.4842 1.31699 21.4337 0.670598 19.2899 0.300381C19.2508 0.293236 19.2118 0.311092 19.1917 0.346805C18.928 0.815823 18.6359 1.4277 18.4314 1.90863C16.1255 1.56342 13.8315 1.56342 11.5729 1.90863C11.3683 1.41701 11.0656 0.815823 10.8007 0.346805C10.7806 0.312284 10.7416 0.294428 10.7026 0.300381C8.55989 0.669415 6.50945 1.31581 4.59617 2.19434C4.57961 2.20149 4.56541 2.2134 4.55599 2.22887C0.66674 8.03932 -0.398688 13.707 0.123975 19.3043C0.12634 19.3317 0.141712 19.3579 0.162998 19.3745C2.72901 21.259 5.21463 22.403 7.6541 23.1613C7.69314 23.1732 7.73451 23.1589 7.75935 23.1267C8.33641 22.3387 8.8508 21.5078 9.29185 20.634C9.31787 20.5828 9.29303 20.5221 9.23983 20.5019C8.42391 20.1924 7.647 19.815 6.89966 19.3865C6.84055 19.3519 6.83582 19.2674 6.8902 19.2269C7.04747 19.1091 7.20477 18.9864 7.35494 18.8626C7.38211 18.84 7.41997 18.8353 7.45192 18.8495C12.3616 21.0911 17.6769 21.0911 22.5287 18.8495C22.5606 18.8341 22.5985 18.8389 22.6268 18.8615C22.7771 18.9853 22.9343 19.1091 23.0928 19.2269C23.1472 19.2674 23.1436 19.3519 23.0845 19.3865C22.3372 19.8233 21.5602 20.1924 20.7431 20.5007C20.6899 20.5209 20.6663 20.5828 20.6923 20.634C21.1428 21.5066 21.6572 22.3375 22.2236 23.1256C22.2473 23.1589 22.2898 23.1732 22.3289 23.1613C24.7802 22.403 27.2658 21.259 29.8318 19.3745C29.8543 19.3579 29.8685 19.3329 29.8708 19.3055C30.4964 12.8343 28.8231 7.21318 25.4353 2.23005C25.427 2.2134 25.4128 2.20149 25.3963 2.19434ZM10.025 15.8961C8.54687 15.8961 7.32892 14.539 7.32892 12.8724C7.32892 11.2058 8.52325 9.84878 10.025 9.84878C11.5386 9.84878 12.7448 11.2178 12.7211 12.8724C12.7211 14.539 11.5268 15.8961 10.025 15.8961ZM19.9934 15.8961C18.5153 15.8961 17.2974 14.539 17.2974 12.8724C17.2974 11.2058 18.4917 9.84878 19.9934 9.84878C21.507 9.84878 22.7132 11.2178 22.6896 12.8724C22.6896 14.539 21.507 15.8961 19.9934 15.8961Z" fill="white" />
-                    </svg>
-                  </a>
-                  <a
-                    href={member.social.linkedin}
-                    className="bg-[#1C1C1C] flex justify-center items-center w-12 h-12 rounded-lg hover:bg-gray-700 transition-colors duration-300"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M26.8219 3.06893C26.6766 2.9435 26.4999 2.86008 26.3108 2.82766C26.1216 2.79524 25.9272 2.81504 25.7485 2.88494L1.99924 12.1791C1.66266 12.31 1.37771 12.5466 1.18728 12.8535C0.996848 13.1603 0.911252 13.5207 0.943375 13.8804C0.975498 14.2401 1.1236 14.5797 1.36539 14.8479C1.60718 15.1161 1.92956 15.2986 2.28401 15.3678L8.43752 16.576V23.4373C8.43631 23.811 8.54737 24.1765 8.75632 24.4864C8.96527 24.7962 9.26246 25.0362 9.6094 25.1752C9.95579 25.3166 10.3367 25.3506 10.7027 25.2726C11.0686 25.1947 11.4027 25.0084 11.6614 24.7381L14.6285 21.6607L19.336 25.781C19.6756 26.0823 20.1136 26.249 20.5676 26.2498C20.7665 26.2496 20.9642 26.2184 21.1535 26.1572C21.4629 26.0591 21.7411 25.8816 21.9604 25.6425C22.1798 25.4033 22.3327 25.1109 22.4039 24.7943L27.1606 4.10135C27.2031 3.91473 27.1941 3.72004 27.1344 3.53817C27.0748 3.35629 26.9667 3.19408 26.8219 3.06893ZM19.6571 7.28768L9.15823 14.8064L3.34572 13.6662L19.6571 7.28768ZM10.3125 23.4373V17.8732L13.2176 20.4209L10.3125 23.4373ZM20.5699 24.3748L10.8809 15.8787L24.8262 5.88377L20.5699 24.3748Z" fill="white" />
-                    </svg>
-                  </a>
-                </div>
-
-                <div className="flex flex-col gap-y-2">
-                  <div className="flex items-center gap-x-2">
-                    <svg width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.5 0.5H2.5C1.90326 0.5 1.33097 0.737053 0.90901 1.15901C0.487053 1.58097 0.25 2.15326 0.25 2.75V19.25C0.25 19.8467 0.487053 20.419 0.90901 20.841C1.33097 21.2629 1.90326 21.5 2.5 21.5H11.5C12.0967 21.5 12.669 21.2629 13.091 20.841C13.5129 20.419 13.75 19.8467 13.75 19.25V2.75C13.75 2.15326 13.5129 1.58097 13.091 1.15901C12.669 0.737053 12.0967 0.5 11.5 0.5ZM1.75 5H12.25V17H1.75V5ZM2.5 2H11.5C11.6989 2 11.8897 2.07902 12.0303 2.21967C12.171 2.36032 12.25 2.55109 12.25 2.75V3.5H1.75V2.75C1.75 2.55109 1.82902 2.36032 1.96967 2.21967C2.11032 2.07902 2.30109 2 2.5 2ZM11.5 20H2.5C2.30109 20 2.11032 19.921 1.96967 19.7803C1.82902 19.6397 1.75 19.4489 1.75 19.25V18.5H12.25V19.25C12.25 19.4489 12.171 19.6397 12.0303 19.7803C11.8897 19.921 11.6989 20 11.5 20Z" fill="white" />
-                    </svg>
-                    <span className="text-white/60 text-sm font-medium">
-                      +234 8123456789
-                    </span>
+              <div className="relative">
+                {(copiedMessages[`${member.name}-Discord`] || copiedMessages[`${member.name}-Telegram`]) && (
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-3 py-1 rounded-md text-sm whitespace-nowrap z-10">
+                    {copiedMessages[`${member.name}-Discord`] || copiedMessages[`${member.name}-Telegram`]}
                   </div>
-
-
-                  <div className="flex items-center justify-center sm:justify-start gap-x-2 w-full sm:w-auto">
-                    <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 0.5H1C0.801088 0.5 0.610322 0.579018 0.46967 0.71967C0.329018 0.860322 0.25 1.05109 0.25 1.25V14C0.25 14.3978 0.408035 14.7794 0.68934 15.0607C0.970644 15.342 1.35218 15.5 1.75 15.5H18.25C18.6478 15.5 19.0294 15.342 19.3107 15.0607C19.592 14.7794 19.75 14.3978 19.75 14V1.25C19.75 1.05109 19.671 0.860322 19.5303 0.71967C19.3897 0.579018 19.1989 0.5 19 0.5ZM10 8.48281L2.92844 2H17.0716L10 8.48281ZM7.25406 8L1.75 13.0447V2.95531L7.25406 8ZM8.36406 9.01719L9.48906 10.0531C9.62743 10.1801 9.80842 10.2506 9.99625 10.2506C10.1841 10.2506 10.3651 10.1801 10.5034 10.0531L11.6284 9.01719L17.0659 14H2.92844L8.36406 9.01719ZM12.7459 8L18.25 2.95438V13.0456L12.7459 8Z" fill="white" />
+                )}
+                <div className="flex justify-center gap-x-4">
+                  <a
+                    href={member.social.x}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#1C1C1C] flex justify-center items-center w-12 h-12 rounded-lg hover:bg-gray-700 transition-colors duration-300"
+                    title="X (Twitter)"
+                  >
+                    <svg width="20" height="18" viewBox="0 0 44 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M34.6526 0.8078H41.3995L26.6594 17.6548L44 40.5797H30.4225L19.7881 26.6759L7.61989 40.5797H0.868864L16.6349 22.56L0 0.8078H13.9222L23.5348 13.5165L34.6526 0.8078ZM32.2846 36.5414H36.0232L11.8908 4.63406H7.87892L32.2846 36.5414Z" fill="white" />
                     </svg>
-                    <span className="text-white/60 text-sm font-medium truncate">{member.email || 'email@web3unilag.com'}</span>
-                  </div>
+                  </a>
+                  <button
+                    onClick={() => copyToClipboard(member.social.discord.replace('', ''), 'Discord', member.name)}
+                    className="bg-[#1C1C1C] flex justify-center items-center w-12 h-12 rounded-lg hover:bg-gray-700 transition-colors duration-300"
+                    title="Copy Discord Username"
+                  >
+                    <svg width="20" height="15" viewBox="0 0 48 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M40.634 3.31127C37.5747 1.90751 34.294 0.873274 30.8638 0.280927C30.8013 0.269495 30.7389 0.298065 30.7067 0.355205C30.2848 1.10563 29.8175 2.08463 29.4902 2.85412C25.8008 2.30178 22.1304 2.30178 18.5166 2.85412C18.1893 2.06753 17.705 1.10563 17.2811 0.355205C17.249 0.299971 17.1866 0.271402 17.1241 0.280927C13.6958 0.871381 10.4151 1.90561 7.35387 3.31127C7.32737 3.32269 7.30465 3.34176 7.28958 3.3665C1.06678 12.6632 -0.6379 21.7314 0.19836 30.6872C0.202144 30.731 0.22674 30.7729 0.260796 30.7996C4.36642 33.8147 8.34341 35.6451 12.2466 36.8583C12.309 36.8774 12.3752 36.8546 12.415 36.8031C13.3383 35.5423 14.1613 34.2128 14.867 32.8147C14.9086 32.7328 14.8688 32.6357 14.7837 32.6033C13.4783 32.1081 12.2352 31.5043 11.0395 30.8187C10.9449 30.7634 10.9373 30.6281 11.0243 30.5634C11.2759 30.3748 11.5276 30.1786 11.7679 29.9805C11.8114 29.9444 11.872 29.9367 11.9231 29.9596C19.7786 33.5461 28.2831 33.5461 36.0459 29.9596C36.097 29.9348 36.1576 29.9425 36.203 29.9787C36.4433 30.1767 36.6949 30.3748 36.9484 30.5634C37.0354 30.6281 37.0298 30.7634 36.9352 30.8187C35.7394 31.5176 34.4964 32.1081 33.189 32.6014C33.1039 32.6338 33.0661 32.7328 33.1077 32.8147C33.8285 34.2108 34.6515 35.5403 35.5578 36.8012C35.5956 36.8546 35.6637 36.8774 35.7262 36.8583C39.6483 35.6451 43.6252 33.8147 47.7309 30.7996C47.7668 30.7729 47.7895 30.7329 47.7933 30.6891C48.7942 20.3352 46.117 11.3414 40.6964 3.3684C40.6832 3.34176 40.6605 3.32269 40.634 3.31127ZM16.04 25.2341C13.675 25.2341 11.7263 23.0628 11.7263 20.3962C11.7263 17.7297 13.6372 15.5584 16.04 15.5584C18.4617 15.5584 20.3916 17.7487 20.3538 20.3962C20.3538 23.0628 18.4428 25.2341 16.04 25.2341ZM31.9895 25.2341C29.6245 25.2341 27.6758 23.0628 27.6758 20.3962C27.6758 17.7297 29.5867 15.5584 31.9895 15.5584C34.4113 15.5584 36.3411 17.7487 36.3033 20.3962C36.3033 23.0628 34.4113 25.2341 31.9895 25.2341Z" fill="white" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => copyToClipboard(member.social.telegram.replace('', ''), 'Telegram', member.name)}
+                    className="bg-[#1C1C1C] flex justify-center items-center w-12 h-12 rounded-lg hover:bg-gray-700 transition-colors duration-300"
+                    title="Copy Telegram Username"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24ZM24.8601 17.7179C22.5257 18.6888 17.8603 20.6984 10.8638 23.7466C9.72766 24.1984 9.13251 24.6404 9.07834 25.0726C8.98677 25.803 9.90142 26.0906 11.1469 26.4822C11.3164 26.5355 11.4919 26.5907 11.6719 26.6492C12.8973 27.0475 14.5457 27.5135 15.4026 27.5321C16.1799 27.5489 17.0475 27.2284 18.0053 26.5707C24.5423 22.158 27.9168 19.9276 28.1286 19.8795C28.2781 19.8456 28.4852 19.803 28.6255 19.9277C28.7659 20.0524 28.7521 20.2886 28.7372 20.352C28.6466 20.7383 25.0562 24.0762 23.1982 25.8036C22.619 26.3421 22.2081 26.724 22.1242 26.8113C21.936 27.0067 21.7443 27.1915 21.56 27.3692C20.4215 28.4667 19.5678 29.2896 21.6072 30.6336C22.5873 31.2794 23.3715 31.8135 24.1539 32.3463C25.0084 32.9282 25.8606 33.5085 26.9632 34.2313C27.2442 34.4155 27.5125 34.6068 27.7738 34.7931C28.7681 35.5019 29.6615 36.1388 30.7652 36.0373C31.4065 35.9782 32.0689 35.3752 32.4053 33.5767C33.2004 29.3263 34.7633 20.1169 35.1244 16.3219C35.1561 15.9895 35.1163 15.5639 35.0843 15.3771C35.0523 15.1904 34.9855 14.9242 34.7427 14.7272C34.4552 14.4939 34.0113 14.4447 33.8127 14.4482C32.91 14.4641 31.5251 14.9456 24.8601 17.7179Z" fill="white" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </Card>

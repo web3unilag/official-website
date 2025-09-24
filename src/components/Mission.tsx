@@ -1,7 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Users, Lightbulb, Award } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const Mission = () => {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
   const missions = [
     {
       icon: (<svg width="44" className="w-8 h-8" height="42" viewBox="0 0 44 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,16 +35,22 @@ const Mission = () => {
   return (
     <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Our Mission
           </h2>
 
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div 
+          ref={gridRef}
+          className={`grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+        >
           {missions.map((mission, index) => (
-            <div key={index} className="p-8 text-left rounded-2xl text-white hover:shadow-lg transition-all duration-300 group" style={{background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)'}}>
+            <div key={index} className="p-8 text-left rounded-2xl text-white hover:shadow-lg hover-lift transition-all duration-300 group" style={{background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)'}}>
               <div className="inline-flex items-center justify-center p-4 bg-white rounded-md mb-6 transition-colors duration-300">
               {mission.icon}
               </div>

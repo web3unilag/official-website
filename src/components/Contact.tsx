@@ -1,4 +1,9 @@
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+
 const Contact = () => {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: contentRef, isInView: contentInView } = useScrollAnimation();
+
   const socialLinks = {
     twitter: "https://twitter.com/Web3Unilag",
     github: "https://github.com/web3unilag",
@@ -8,7 +13,10 @@ const Contact = () => {
   return (
     <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-10 sm:mb-12 md:mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Get in Touch
           </h2>
@@ -17,10 +25,13 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <div 
+          ref={contentRef}
+          className={`flex flex-col lg:flex-row gap-8 lg:gap-12 stagger-children ${contentInView ? 'in-view' : ''}`}
+        >
           {/* Contact Info */}
-          <div className="w-full lg:w-1/2 xl:w-2/5">
-            <div className="flex flex-col gap-y-6 p-6 sm:p-8 rounded-xl ">
+          <div className="w-full lg:w-1/2 xl:w-2/5 animate-fade-in-left">
+            <div className="flex flex-col gap-y-6 p-6 sm:p-8 rounded-xl hover-lift">
               <h3 className="text-2xl font-bold text-foreground">Contact Info</h3>
 
               <div className="flex flex-col gap-y-6">
@@ -46,8 +57,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Email</p>
-                    <a href="mailto:contact@web3unilag.com" className="text-foreground hover:text-primary transition-colors">
-                      contact@web3unilag.com
+                    <a href="mailto:web3unilag@gmail.com" className="text-foreground hover:text-primary transition-colors">
+                      web3unilag@gmail.com
                     </a>
                   </div>
                 </div>
@@ -61,8 +72,8 @@ const Contact = () => {
                   className=" hover:bg-foreground/10 p-3 rounded-lg transition-colors"
                   aria-label="Twitter"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M22.162 5.656a8.384 8.384 0 01-2.402.658A4.196 4.196 0 0021.6 4c-.82.488-1.719.83-2.656 1.015a4.182 4.182 0 00-7.126 3.814 11.874 11.874 0 01-8.62-4.37 4.168 4.168 0 00-.566 2.103c0 1.45.738 2.731 1.86 3.481a4.168 4.168 0 01-1.894-.523v.052a4.185 4.185 0 003.355 4.101 4.21 4.21 0 01-1.89.072A4.185 4.185 0 007.97 16.65a8.394 8.394 0 01-6.19 1.732 11.83 11.83 0 006.41 1.88c7.693 0 11.9-6.373 11.9-11.9 0-.18-.005-.362-.013-.54a8.496 8.496 0 002.087-2.165z" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18.901 1.153h4.09l-8.94 9.46 10.5 13.84h-8.22l-6.41-8.39-7.37 8.39H.5l9.59-10.15L0 1.154h8.4l5.78 7.55 6.72-7.55zM17.61 20.844h1.33L6.48 3.06H5.04L17.61 20.844z" fill="currentColor"/>
                   </svg>
                 </a>
                 <a
@@ -92,8 +103,8 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="w-full lg:w-1/2 xl:w-3/5">
-            <div className="flex flex-col gap-y-6 p-6 sm:p-8 rounded-xl  w-full">
+          <div className="w-full lg:w-1/2 xl:w-3/5 animate-fade-in-right">
+            <div className="flex flex-col gap-y-6 p-6 sm:p-8 rounded-xl hover-lift w-full">
               <h3 className="text-2xl font-bold text-foreground">Contact Info</h3>
               <form action="">
                 <div className="flex flex-col gap-y-6 w-full">
