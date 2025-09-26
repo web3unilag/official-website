@@ -1,86 +1,90 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Partners = () => {
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: contentRef, isInView: contentInView } = useScrollAnimation();
+  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Sample partner data - can be replaced with actual partner information
+  // Actual partner data with real logos from public/partners folder
   const partners = [
     {
       id: 1,
-      name: "Ethereum Foundation",
-      logo: "/lovable-uploads/ethereum-logo.png",
-      description: "Supporting blockchain education and development across the globe",
-      website: "https://ethereum.org",
-      category: "Blockchain Foundation",
-      tier: "Platinum"
+      name: "Noble",
+      logo: "/partners/1_Logo_full_bright (use this).png",
+      description: "Native asset issuance protocol enabling digital assets to thrive across the interchain ecosystem",
+      website: "https://nobleassets.xyz",
+      category: "Asset Issuance",
+      tier: "Strategic",
+      founded: "2022",
+      focus: "Interchain Assets"
     },
     {
       id: 2,
-      name: "Polygon",
-      logo: "/lovable-uploads/polygon-logo.png", 
-      description: "Scaling Ethereum for mass adoption with Layer 2 solutions",
-      website: "https://polygon.technology",
-      category: "Layer 2 Solution",
-      tier: "Gold"  
+      name: "Quai Network",
+      logo: "/partners/Quai_White.png",
+      description: "Scalable proof-of-work blockchain network with merged mining and infinite scalability",
+      website: "https://qu.ai",
+      category: "Layer 1 Blockchain",
+      tier: "Strategic",
+      founded: "2019",
+      focus: "Scalable PoW"
     },
     {
       id: 3,
-      name: "Chainlink",
-      logo: "/lovable-uploads/chainlink-logo.png",
-      description: "Decentralized oracle networks connecting smart contracts",
-      website: "https://chain.link",
-      category: "Oracle Network",
-      tier: "Gold"
+      name: "Akash Network",
+      logo: "/partners/akash-white-t.png",
+      description: "Decentralized cloud computing marketplace providing secure, censorship-resistant cloud infrastructure",
+      website: "https://akash.network",
+      category: "Cloud Computing",
+      tier: "Strategic",
+      founded: "2018",
+      focus: "DeCloud"
     },
     {
       id: 4,
-      name: "Consensys",
-      logo: "/lovable-uploads/consensys-logo.png",
-      description: "Building the infrastructure and tools for Web3 ecosystem",
-      website: "https://consensys.net",
-      category: "Web3 Infrastructure",
-      tier: "Platinum"
+      name: "SingularityNET DAO",
+      logo: "/partners/SNET Logo - Horizontal - Purple - 2021.jpg",
+      description: "Decentralized AI marketplace enabling anyone to create, share, and monetize AI services",
+      website: "https://singularitynet.io",
+      category: "AI & Blockchain",
+      tier: "Strategic",
+      founded: "2017",
+      focus: "Decentralized AI"
     },
     {
       id: 5,
-      name: "Binance Academy",
-      logo: "/lovable-uploads/binance-logo.png",
-      description: "Leading blockchain education platform and exchange",
-      website: "https://academy.binance.com",
+      name: "HackQuest",
+      logo: "/partners/hackquest.png",
+      description: "Leading Web3 developer education platform with hands-on learning experiences",
+      website: "https://hackquest.io",
       category: "Education",
-      tier: "Gold"
-        },
+      tier: "Strategic",
+      founded: "2021",
+      focus: "Developer Education"
+    },
     {
       id: 6,
-      name: "University of Lagos",
-      logo: "/lovable-uploads/unilag-logo.png",
-      description: "Our home institution supporting blockchain innovation",
-      website: "https://unilag.edu.ng",
-      category: "Academic Institution",
-      tier: "Strategic"
-    },
-    {
-      id: 7,
-      name: "Solana Foundation",
-      logo: "/lovable-uploads/solana-logo.png",
-      description: "High-performance blockchain for decentralized applications",
-      website: "https://solana.org",
-      category: "Blockchain Platform",
-      tier: "Gold"
-    },
-    {
-      id: 8,
-      name: "Avalanche",
-      logo: "/lovable-uploads/avalanche-logo.png",
-      description: "Fastest smart contracts platform in the blockchain industry",
-      website: "https://avax.network",
-      category: "Blockchain Platform",
-      tier: "Silver"
+      name: "Octant",
+      logo: "/partners/Group 31.png",
+      description: "Funding platform for public goods using Ethereum staking rewards to support open source projects",
+      website: "https://octant.app",
+      category: "Public Goods",
+      tier: "Strategic",
+      founded: "2023",
+      focus: "Public Goods Funding"
     }
   ];
+
+  // Auto-rotate slides every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % partners.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [partners.length]);
 
   const getTierColor = (tier: string) => {
     switch (tier) {
@@ -106,165 +110,165 @@ const Partners = () => {
   const duplicatedPartners = [...partners, ...partners];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-background via-background/95 to-primary/5 overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div 
+    <section className="py-12 sm:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div
           ref={headerRef}
-          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 sm:mb-12 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Our Strategic Partners
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            We collaborate with industry-leading organizations to deliver exceptional Web3 education, 
+          <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
+            We collaborate with industry-leading organizations to deliver exceptional Web3 education,
             cutting-edge resources, and transformative opportunities to our community.
           </p>
         </div>
 
-        {/* Infinite Scrolling Partners */}
-        <div 
+        {/* Featured Partner Carousel */}
+        <div
           ref={contentRef}
           className={`relative mb-16 animate-fade-in-up ${contentInView ? 'in-view' : ''}`}
         >
-          {/* Gradient overlays for smooth edges */}
-          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
-          
-          <div className="flex animate-scroll-infinite hover:pause-animation">
-            {duplicatedPartners.map((partner, index) => (
-              <div
-                key={`${partner.id}-${index}`}
-                className={`flex-shrink-0 w-80 mx-4 bg-gradient-to-br ${getTierColor(partner.tier)} backdrop-blur-sm border rounded-3xl p-6 hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 group cursor-pointer`}
-                onMouseEnter={() => setHoveredCard(partner.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                onClick={() => window.open(partner.website, '_blank')}
-              >
-                <div className="relative h-full">
-                  {/* Tier Badge */}
-                  <div className={`absolute -top-2 -right-2 px-3 py-1 rounded-full text-xs font-bold border ${getTierBadgeColor(partner.tier)} backdrop-blur-sm`}>
-                    {partner.tier}
-                  </div>
+          <div className="relative bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/50 rounded-3xl p-8 overflow-hidden">
+            {/* Background pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
 
-                  {/* Partner Logo */}
-                  <div className="flex justify-center mb-6">
-                    <div className="relative w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 group-hover:rotate-3 group-hover:scale-110">
-                      <img
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        className="w-12 h-12 object-contain transition-transform duration-300"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.parentElement!.innerHTML = `
-                            <div class="w-12 h-12 bg-primary/30 rounded-xl flex items-center justify-center">
-                              <span class="text-primary font-bold text-xl">${partner.name.charAt(0)}</span>
-                            </div>
-                          `;
-                        }}
-                      />
-                      
-                      {/* Glow effect on hover */}
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                  </div>
-
-                  {/* Partner Info */}
-                  <div className="text-center space-y-3">
-                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                      {partner.name}
-                    </h3>
-                    
-                    <div className="flex justify-center gap-2 flex-wrap">
-                      <span className="inline-block px-3 py-1 bg-white/10 text-white/90 text-xs rounded-full border border-white/20">
-                        {partner.category}
-                      </span>
-                    </div>
-
-                    <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 group-hover:text-white/80 transition-colors duration-300">
-                      {partner.description}
-                    </p>
-
-                    {/* Hover overlay with additional info */}
-                    <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent rounded-3xl flex items-end justify-center p-6 transition-opacity duration-300 ${hoveredCard === partner.id ? 'opacity-100' : 'opacity-0'}`}>
-                      <div className="text-center">
-                        <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium text-sm hover:bg-primary/90 transition-colors">
-                          Visit Website
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
+            {/* Featured Partner Display */}
+            <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-bold border ${getTierBadgeColor(partners[currentSlide].tier)} backdrop-blur-sm`}>
+                    {partners[currentSlide].tier} Partner
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Partnership Tiers */}
-        <div className={`mb-16 animate-fade-in-up ${contentInView ? 'in-view' : ''}`} style={{ animationDelay: '0.3s' }}>
-          <h3 className="text-2xl font-bold text-center text-foreground mb-8">Partnership Tiers</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {[
-              { tier: 'Platinum', count: partners.filter(p => p.tier === 'Platinum').length, icon: '💎' },
-              { tier: 'Gold', count: partners.filter(p => p.tier === 'Gold').length, icon: '🥇' },
-              { tier: 'Silver', count: partners.filter(p => p.tier === 'Silver').length, icon: '🥈' },
-              { tier: 'Strategic', count: partners.filter(p => p.tier === 'Strategic').length, icon: '🤝' }
-            ].map((tierInfo) => (
-              <div key={tierInfo.tier} className={`text-center p-4 rounded-xl border ${getTierBadgeColor(tierInfo.tier)} backdrop-blur-sm`}>
-                <div className="text-2xl mb-2">{tierInfo.icon}</div>
-                <div className="font-bold text-lg">{tierInfo.count}</div>
-                <div className="text-sm opacity-80">{tierInfo.tier}</div>
+                <h3 className="text-3xl md:text-4xl font-bold text-foreground">
+                  {partners[currentSlide].name}
+                </h3>
+
+                <div className="flex gap-3 flex-wrap">
+                  <span className="px-3 py-1 bg-primary/20 text-white/90 text-sm rounded-full border border-primary/30">
+                    {partners[currentSlide].category}
+                  </span>
+                  <span className="px-3 py-1 bg-white/10 text-white/90 text-sm rounded-full border border-white/20">
+                    {partners[currentSlide].focus}
+                  </span>
+                </div>
+
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  {partners[currentSlide].description}
+                </p>
+
+                <div className="flex gap-4">
+                  <a
+                    href={partners[currentSlide].website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
+                  >
+                    Visit Website
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                  <button
+                    onClick={() => setCurrentSlide((prev) => (prev + 1) % partners.length)}
+                    className="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-6 py-3 rounded-xl font-medium hover:bg-white/20 transition-all duration-300"
+                  >
+                    Next Partner
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-            ))}
+
+              {/* Partner Logo Display */}
+              <div className="flex justify-center">
+                <div className="relative w-64 h-64 bg-white/5 rounded-3xl flex items-center justify-center border border-white/10 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:rotate-1">
+                  <img
+                    src={partners[currentSlide].logo}
+                    alt={`${partners[currentSlide].name} logo`}
+                    className="max-w-48 max-h-48 object-contain transition-all duration-500 hover:scale-110"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      e.currentTarget.parentElement!.innerHTML = `
+                        <div class="w-32 h-32 bg-primary/30 rounded-2xl flex items-center justify-center">
+                          <span class="text-primary font-bold text-4xl">${partners[currentSlide].name.charAt(0)}</span>
+                        </div>
+                      `;
+                    }}
+                  />
+
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Carousel Indicators */}
+            <div className="flex justify-center gap-2 mt-8">
+              {partners.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
+                      ? 'bg-primary scale-125'
+                      : 'bg-white/30 hover:bg-white/50'
+                    }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Call to Action */}
-        <div 
-          className={`text-center animate-fade-in-up ${contentInView ? 'in-view' : ''}`}
-          style={{ animationDelay: '0.6s' }}
-        >
-          <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/50 rounded-3xl p-8 max-w-2xl mx-auto relative overflow-hidden">
-            {/* Background pattern */}
+        <div className="text-center">
+          <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/50 rounded-3xl p-8 max-w-3xl mx-auto relative overflow-hidden">
+            {/* Animated background pattern */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-pulse"></div>
+
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold text-foreground mb-4">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-white/90 rounded-2xl flex items-center justify-center">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-primary">
+                    <path d="M16 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H8M16 4V2M16 4V6M8 4V2M8 4V6M8 8H16M8 12H16M8 16H12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </div>
+
+              <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Become a Partner
               </h3>
-              <p className="text-muted-foreground mb-6 text-lg">
+              <p className="text-muted-foreground mb-8 text-lg max-w-2xl mx-auto">
                 Join our ecosystem of innovators and help shape the future of Web3 education in Africa.
+                Together, we can build the next generation of blockchain leaders.
               </p>
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-8 py-4 rounded-xl font-medium hover:from-primary/90 hover:to-primary/70 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
-              >
-                Start Partnership
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground px-8 py-4 rounded-xl font-medium"
+                >
+                  Start Partnership
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <style>{`
-        @keyframes scroll-infinite {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .animate-scroll-infinite {
-          animation: scroll-infinite 40s linear infinite;
-        }
-        
-        .pause-animation:hover {
-          animation-play-state: paused;
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
         
         .line-clamp-3 {
@@ -272,6 +276,39 @@ const Partners = () => {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+        
+        /* Enhanced hover effects */
+        .hover-lift:hover {
+          transform: translateY(-4px) scale(1.02);
+        }
+        
+        /* Stagger animation for children */
+        .stagger-children {
+          opacity: 0;
+          transform: translateY(20px);
+          animation: stagger-fade-in 0.6s ease-out forwards;
+        }
+        
+        @keyframes stagger-fade-in {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        /* Pulse animation for interactive elements */
+        @keyframes gentle-pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+        }
+        
+        .animate-gentle-pulse {
+          animation: gentle-pulse 2s ease-in-out infinite;
         }
       `}</style>
     </section>

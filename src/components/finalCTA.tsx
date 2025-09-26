@@ -15,25 +15,31 @@ const FinalCTA = () => {
   ];
 
   return (
-    <section className="bg-black text-white py-20 sm:py-32">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="bg-black text-white py-12 sm:py-16 lg:py-20">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Text Content */}
           <div 
             ref={contentRef}
             className={`flex flex-col justify-center text-center lg:text-left animate-fade-in-left ${contentInView ? 'in-view' : ''}`}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 sm:mb-6">
               Join the force that moves web 3
             </h2>
-            <p className="text-white/70 mb-8">
+            <p className="text-white/70 mb-6 sm:mb-8 text-sm sm:text-base">
               Built By Students, For the Future
             </p>
             <div className="flex justify-center lg:justify-start">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 hover-lift text-white font-semibold">
-                Join Community
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeCXQSKZ3RWhET3IkZJVB1HMvSXLZ-Edhv3V_PQ6qlebOC8Pg/viewform?usp=sf_link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button size="lg" className="bg-primary hover:bg-primary/90 hover-lift text-white font-semibold">
+                  Join Community
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
             </div>
           </div>
 

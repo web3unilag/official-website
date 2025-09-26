@@ -40,10 +40,10 @@ const Footer = () => {
             <div>
               <h4 className="text-base text-white/70 font-semibold mb-4">Resources</h4>
               <ul className="space-y-3">
-                <li><a href="#" className="text-white hover:text-white/70 text-sm transition-colors">Blog</a></li>
-                <li><a href="#" className="text-white hover:text-white/70 text-sm transition-colors">Documentation</a></li>
-                <li><a href="#" className="text-white hover:text-white/70 text-sm transition-colors">Guides</a></li>
-                <li><a href="#" className="text-white hover:text-white/70 text-sm transition-colors">Contact</a></li>
+                <li><a href="https://web3unilag.substack.com/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 text-sm transition-colors">Blog</a></li>
+                <li><a href="https://drive.google.com/drive/folders/1tH-BtLtmhnIxc2t60hvU4UHnm6JWBDlo" target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/70 text-sm transition-colors">Brand Assets</a></li>
+                <li><a href="#programs" className="text-white hover:text-white/70 text-sm transition-colors">Programs</a></li>
+                <li><a href="#contact" className="text-white hover:text-white/70 text-sm transition-colors">Contact</a></li>
               </ul>
             </div>
 

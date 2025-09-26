@@ -59,9 +59,15 @@ className={`${scrolled ? 'text-white hover:text-blue-200' : 'text-white'} text-s
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className={`${scrolled ? 'bg-white text-blue-800 hover:bg-blue-100' : 'bg-primary text-white hover:bg-primary/90'} font-semibold transition-colors duration-300`}>
-              Join Community
-            </Button>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeCXQSKZ3RWhET3IkZJVB1HMvSXLZ-Edhv3V_PQ6qlebOC8Pg/viewform?usp=sf_link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className={`${scrolled ? 'bg-white text-blue-800 hover:bg-blue-100' : 'bg-primary text-white hover:bg-primary/90'} font-semibold transition-colors duration-300`}>
+                Join Community
+              </Button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -90,9 +96,17 @@ className={`${scrolled ? 'text-white hover:text-blue-200' : 'text-white'} text-s
                 </a>
               ))}
               <div className="px-3 py-2">
-                <Button className="w-full text-sm font-semibold bg-white text-blue-800 hover:bg-blue-100 transition-colors duration-300">
-                  Join Community
-                </Button>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeCXQSKZ3RWhET3IkZJVB1HMvSXLZ-Edhv3V_PQ6qlebOC8Pg/viewform?usp=sf_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Button className="w-full text-sm font-semibold bg-white text-blue-800 hover:bg-blue-100 transition-colors duration-300">
+                    Join Community
+                  </Button>
+                </a>
               </div>
             </div>
           </div>

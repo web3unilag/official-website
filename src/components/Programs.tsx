@@ -1,67 +1,47 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
-import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const Programs = () => {
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
-  const [showAll, setShowAll] = useState(false);
   const programs = [
     {
-      image: "/lovable-uploads/e5eecc6c-849c-46d6-8b20-c73646e9a5c0.png",
-      title: "Blockchain Fundamentals",
-      description: "Learn the basics of blockchain technology, cryptocurrencies, and decentralized applications through our comprehensive beginner course.",
-      duration: "4 weeks",
+      image: "/programs/video_editing.jpg",
+      title: "Video Editing Mastery",
+      description: "Learn professional video editing techniques, from basic cuts to advanced effects. Master industry-standard software and create compelling visual content.",
+      duration: "6 weeks",
       level: "Beginner",
       rating: 4.8,
-      students: 1200,
-      instructor: "Dr. Sarah Chen"
+      students: 245,
+      instructor: "Web3 UNILAG Team",
+      link: "https://drive.google.com/drive/folders/1xdxyjyPlxtcUFDt7HMcvDezlV2X092xb"
     },
     {
-      image: "/lovable-uploads/a5fa2a11-b7c7-4dd3-9bbd-3618f915ab35.png",
-      title: "Smart Contract Development",
-      description: "Master Solidity programming and learn to build, test, and deploy smart contracts on Ethereum and other blockchain networks.",
+      image: "/programs/trading.jpg",
+      title: "Trading Fundamentals",
+      description: "Master the fundamentals of trading, technical analysis, risk management, and market psychology. Learn to make informed trading decisions.",
       duration: "8 weeks",
       level: "Intermediate",
-      rating: 4.9,
-      students: 850,
-      instructor: "Prof. Michael Rodriguez"
-    },
-    {
-      image: "/lovable-uploads/ca98be94-5a4a-45a1-a95c-d7936076f8eb.png",
-      title: "DeFi Development",
-      description: "Dive deep into Decentralized Finance protocols and learn to build the next generation of financial applications.",
-      duration: "12 weeks",
-      level: "Advanced",
       rating: 4.7,
-      students: 420,
-      instructor: "Alex Thompson"
-    },
-    {
-      image: "/lovable-uploads/1fdc1b5e-1e82-499d-bac7-8c0b29940474.png",
-      title: "Blockchain Entrepreneurship",
-      description: "Learn how to build and scale blockchain startups, from ideation to funding and market deployment.",
-      duration: "6 weeks",
-      level: "All Levels",
-      rating: 4.6,
-      students: 680,
-      instructor: "Emma Williams"
+      students: 189,
+      instructor: "Web3 UNILAG Team",
+      link: "https://drive.google.com/drive/u/0/folders/1RWpGGVSKVoYX1NXJDcvI9h1nevGYwYxG"
     }
   ];
 
   return (
-    <section className="pb-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section className="py-12 sm:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         <div 
           ref={headerRef}
-          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 sm:mb-12 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             Programs and Projects
           </h2>
-          <p className="text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto px-4">
             Comprehensive learning paths designed to take you from blockchain basics 
             to building real-world decentralized applications.
           </p>
@@ -69,9 +49,9 @@ const Programs = () => {
         
         <div 
           ref={gridRef}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto stagger-children ${gridInView ? 'in-view' : ''}`}
         >
-          {(showAll ? programs : programs.slice(0, 3)).map((program, index) => (
+          {programs.map((program, index) => (
             <Card key={index} className="overflow-hidden cursor-pointer bg-transparent group hover:shadow-2xl hover-lift transition-all duration-500 border-0 ">
               <div className="relative h-64 overflow-hidden">
                 <img 
@@ -117,39 +97,34 @@ const Programs = () => {
                 </p>
                 
                 <div className="flex items-center justify-center">
-                  <Button 
-                    className="group/btn relative w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
+                  <a
+                    href={program.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Enroll Now
-                      <svg 
-                        className="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                    <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out"></div>
-                  </Button>
+                    <Button 
+                      className="group/btn relative w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden"
+                    >
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        Access Resources
+                        <svg 
+                          className="w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform duration-300" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                      </span>
+                      <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out"></div>
+                    </Button>
+                  </a>
                 </div>
               </div>
             </Card>
           ))}
         </div>
-        
-        {!showAll && programs.length > 3 && (
-          <div className="text-center mt-12">
-            <Button 
-              onClick={() => setShowAll(true)}
-              variant="outline"
-              className="bg-transparent border-2 border-primary text-white hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              View More Courses
-            </Button>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -58,39 +58,17 @@ const EventFrame = ({ date, month, title, organizer, location, time, event_url }
 export function Events() {
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: framesRef, isInView: framesInView } = useScrollAnimation();
-  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
-
-  const events = [
-    {
-      date: "08",
-      month: "APR",
-      year: "2025",
-      title: "Web3 Builder Bootcamp",
-      location: "Unilag, Lagos",
-      attendees: 120,
-      videoThumbnail: "/lovable-uploads/c28286ff-abdd-4961-b661-847b622fef07.png"
-    },
-    {
-      date: "15",
-      month: "MAY",
-      year: "2025",
-      title: "Blockchain Hackathon",
-      location: "Unilag, Lagos",
-      attendees: 85,
-      videoThumbnail: "/lovable-uploads/c28286ff-abdd-4961-b661-847b622fef07.png"
-    },
-    {
-      date: "22",
-      month: "JUN",
-      year: "2025",
-      title: "Web3 Conference",
-      location: "Unilag, Lagos",
-      attendees: 200,
-      videoThumbnail: "/lovable-uploads/c28286ff-abdd-4961-b661-847b622fef07.png"
-    },
-  ];
 
   const eventFrames = [
+    {
+      date: "26",
+      month: "SEP",
+      title: "Community Call: Q&A Session",
+      organizer: "Organized by Web3 Unilag",
+      location: "Google Meet",
+      time: "7:00PM",
+      event_url: "https://meet.google.com/yxm-yetq-nzp"
+    },
     {
       date: "08",
       month: "NOV",
@@ -103,18 +81,18 @@ export function Events() {
   ];
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section className="py-12 sm:py-16">
+      <div className="container mx-auto px-4 sm:px-6">
         <h2
           ref={headerRef}
-          className={`text-3xl font-bold mb-8 text-center animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          Events
+          Events and Showcase
         </h2>
 
         <div
           ref={framesRef}
-          className={`flex flex-col gap-4 mb-8 stagger-children ${framesInView ? 'in-view' : ''}`}
+          className={`flex flex-col gap-3 sm:gap-4 mb-8 sm:mb-12 stagger-children ${framesInView ? 'in-view' : ''}`}
         >
           {/* Dynamic Event Frames */}
           {eventFrames.map((frame, index) => (
@@ -131,33 +109,65 @@ export function Events() {
             </div>
           ))}
         </div>
-        {/* Main Events Grid */}
-        <div
-          ref={gridRef}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 stagger-children ${gridInView ? 'in-view' : ''}`}
-        >
-          {events.map((event, index) => (
-            <div key={index} className="rounded-2xl h-[300px] p-4 flex flex-col justify-end overflow-hidden text-white hover:shadow-lg hover-lift transition-all duration-300 group" style={{ background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)' }}>
-              {/* Content */}
-              <div className="flex justify-between">
-                <div className="">
-                  <div className="text-white/60 capitalize text-base mb-2">
-                    {event.month.toLowerCase()} {event.date}, {event.year}
-                  </div>
-                  <h3 className="text-base font-bold text-white">
-                    {event.title}
-                  </h3>
-                </div>
 
-                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="50" height="50" rx="10" fill="#9B9CA1" fill-opacity="0.5" />
-                  <path d="M38.125 25.0001C38.1258 25.3184 38.0442 25.6315 37.8881 25.9089C37.732 26.1864 37.5068 26.4187 37.2344 26.5833L20.35 36.9122C20.0653 37.0865 19.7393 37.1817 19.4056 37.1879C19.0718 37.194 18.7425 37.111 18.4516 36.9474C18.1634 36.7862 17.9234 36.5513 17.7561 36.2667C17.5889 35.982 17.5005 35.658 17.5 35.3278V14.6724C17.5005 14.3422 17.5889 14.0182 17.7561 13.7335C17.9234 13.4489 18.1634 13.2139 18.4516 13.0528C18.7425 12.8892 19.0718 12.8062 19.4056 12.8123C19.7393 12.8185 20.0653 12.9137 20.35 13.088L37.2344 23.4169C37.5068 23.5815 37.732 23.8138 37.8881 24.0913C38.0442 24.3687 38.1258 24.6818 38.125 25.0001Z" fill="white" />
-                </svg>
-
+        {/* Video Showcase Section */}
+        <div className="mt-4 sm:mt-6">
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 text-center text-foreground">Video Highlights</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            {/* Video 1 */}
+            <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-6 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+              <div className="aspect-video rounded-xl overflow-hidden mb-4">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/pRlFERF4IxM?si=9oS9qpFfNkaOc2v9"
+                  title="Web3 UNILAG Event Highlight 1"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="rounded-xl"
+                ></iframe>
               </div>
-
+              <h4 className="text-lg font-semibold text-foreground mb-2">W3U Trading classes</h4>
             </div>
-          ))}
+
+            {/* Video 2 */}
+            <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-6 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+              <div className="aspect-video rounded-xl overflow-hidden mb-4">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/Y4gAk9uw1lI?si=iY6BVI-xGnU8KGAR"
+                  title="Web3 UNILAG Event Highlight 2"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="rounded-xl"
+                ></iframe>
+              </div>
+              <h4 className="text-lg font-semibold text-foreground mb-2">Video Editing Class: Exporting</h4>
+            </div>
+
+            {/* Video 3 */}
+            <div className="bg-gradient-to-br from-card/50 to-card/30 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-6 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
+              <div className="aspect-video rounded-xl overflow-hidden mb-4">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/JxgyM5TGlWk?si=eeyHTT5ZntkRqZCr"
+                  title="Web3 UNILAG Event Highlight 3"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="rounded-xl"
+                ></iframe>
+              </div>
+              <h4 className="text-lg font-semibold text-foreground mb-2">Video Editing LESSON 3 : CC Interface, Import and Sequence</h4>
+            </div>
+          </div>
         </div>
       </div>
     </section>

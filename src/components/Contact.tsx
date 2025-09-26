@@ -1,8 +1,12 @@
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { useState } from 'react';
 
 const Contact = () => {
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: contentRef, isInView: contentInView } = useScrollAnimation();
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const socialLinks = {
     twitter: "https://twitter.com/Web3Unilag",
@@ -10,17 +14,18 @@ const Contact = () => {
     linkedin: "https://linkedin.com/company/web3unilag"
   };
 
+
   return (
-    <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-12 sm:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         <div 
           ref={headerRef}
-          className={`text-center mb-10 sm:mb-12 md:mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 sm:mb-12 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             Get in Touch
           </h2>
-          <p className="text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto px-4">
             Feel free to contact us and we will get back to you as soon as we can
           </p>
         </div>
@@ -105,41 +110,68 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="w-full lg:w-1/2 xl:w-3/5 animate-fade-in-right">
             <div className="flex flex-col gap-y-6 p-6 sm:p-8 rounded-xl hover-lift w-full">
-              <h3 className="text-2xl font-bold text-foreground">Contact Info</h3>
-              <form action="">
+              <h3 className="text-2xl font-bold text-foreground">Send us a Message</h3>
+              
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="p-4 bg-green-500/20 border border-green-500/40 rounded-lg text-green-300">
+                  Thank you! Your message has been sent successfully. We'll get back to you soon.
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-red-500/20 border border-red-500/40 rounded-lg text-red-300">
+                  Sorry, there was an error sending your message. Please try again or contact us directly.
+                </div>
+              )}
+
+              <form 
+                action="https://www.form-to-email.com/api/s/y27fhNCnFhz8"
+                method="POST"
+              >
                 <div className="flex flex-col gap-y-6 w-full">
                   <div>
                     <input 
                       type="text" 
+                      name="name"
                       placeholder="Name" 
+                      required
                       className="w-full p-3 bg-transparent border-b border-foreground/30 focus:border-primary/80 focus:outline-none transition-colors" 
                     />
                   </div>
                   <div>
                     <input 
                       type="email" 
+                      name="email"
                       placeholder="Email" 
+                      required
                       className="w-full p-3 bg-transparent border-b border-foreground/30 focus:border-primary/80 focus:outline-none transition-colors" 
                     />
                   </div>
                   <div>
                     <textarea 
+                      name="message"
                       placeholder="Message" 
                       rows={4}
+                      required
                       className="w-full p-3 bg-transparent border-b border-foreground/30 focus:border-primary/80 focus:outline-none transition-colors resize-none"
                     ></textarea>
                   </div>
                 </div>
 
-                <div className="flex justify-end mt-2">
+                <div className="flex justify-end mt-6">
                   <button 
                     type="submit" 
-                    className="py-3 px-6 sm:px-8 rounded-lg md:rounded-xl text-white fill-white flex items-center gap-x-2 bg-primary text-background hover:bg-primary/90 transition-colors text-sm sm:text-base"
+                    disabled={isSubmitting}
+                    className="py-3 px-6 sm:px-8 rounded-lg md:rounded-xl text-white fill-white flex items-center gap-x-2 bg-primary text-background hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
                   >
-                    <span className="text-white">Submit</span>
-                    <svg width="20" height="20" viewBox="0 0 22 22" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5">
-                      <path d="M21.3112 0.688511C21.1226 0.50001 20.8871 0.3652 20.629 0.297968C20.371 0.230736 20.0997 0.233512 19.843 0.306011H19.829L1.83461 5.76601C1.54248 5.8502 1.28283 6.02117 1.09007 6.25627C0.897302 6.49136 0.780525 6.77948 0.75521 7.08245C0.729895 7.38541 0.797238 7.68891 0.948314 7.95274C1.09939 8.21657 1.32707 8.42826 1.60117 8.55976L9.56242 12.4373L13.4343 20.3938C13.5547 20.6508 13.7462 20.868 13.9861 21.0196C14.226 21.1713 14.5042 21.2512 14.788 21.2498C14.8312 21.2498 14.8743 21.2479 14.9174 21.2441C15.2201 21.2196 15.5081 21.1031 15.7427 20.9102C15.9773 20.7174 16.1473 20.4573 16.2299 20.1651L21.6862 2.1707C21.6862 2.16601 21.6862 2.16132 21.6862 2.15664C21.7596 1.90066 21.7636 1.62976 21.6977 1.37174C21.6318 1.11373 21.4984 0.877908 21.3112 0.688511ZM14.7965 19.7357L14.7918 19.7488V19.7423L11.0362 12.0266L15.5362 7.52664C15.6709 7.38484 15.7449 7.19603 15.7424 7.00045C15.7399 6.80488 15.6611 6.61803 15.5228 6.47973C15.3845 6.34143 15.1976 6.26262 15.002 6.26012C14.8065 6.25761 14.6177 6.33161 14.4759 6.46632L9.97586 10.9663L2.25742 7.2107H2.25086H2.26399L20.2499 1.74976L14.7965 19.7357Z" fill="white" />
-                    </svg>
+                    <span className="text-white">
+                      {isSubmitting ? 'Sending...' : 'Submit'}
+                    </span>
+                    {!isSubmitting && (
+                      <svg width="20" height="20" viewBox="0 0 22 22" fill="white" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5">
+                        <path d="M21.3112 0.688511C21.1226 0.50001 20.8871 0.3652 20.629 0.297968C20.371 0.230736 20.0997 0.233512 19.843 0.306011H19.829L1.83461 5.76601C1.54248 5.8502 1.28283 6.02117 1.09007 6.25627C0.897302 6.49136 0.780525 6.77948 0.75521 7.08245C0.729895 7.38541 0.797238 7.68891 0.948314 7.95274C1.09939 8.21657 1.32707 8.42826 1.60117 8.55976L9.56242 12.4373L13.4343 20.3938C13.5547 20.6508 13.7462 20.868 13.9861 21.0196C14.226 21.1713 14.5042 21.2512 14.788 21.2498C14.8312 21.2498 14.8743 21.2479 14.9174 21.2441C15.2201 21.2196 15.5081 21.1031 15.7427 20.9102C15.9773 20.7174 16.1473 20.4573 16.2299 20.1651L21.6862 2.1707C21.6862 2.16601 21.6862 2.16132 21.6862 2.15664C21.7596 1.90066 21.7636 1.62976 21.6977 1.37174C21.6318 1.11373 21.4984 0.877908 21.3112 0.688511ZM14.7965 19.7357L14.7918 19.7488V19.7423L11.0362 12.0266L15.5362 7.52664C15.6709 7.38484 15.7449 7.19603 15.7424 7.00045C15.7399 6.80488 15.6611 6.61803 15.5228 6.47973C15.3845 6.34143 15.1976 6.26262 15.002 6.26012C14.8065 6.25761 14.6177 6.33161 14.4759 6.46632L9.97586 10.9663L2.25742 7.2107H2.25086H2.26399L20.2499 1.74976L14.7965 19.7357Z" fill="white" />
+                      </svg>
+                    )}
                   </button>
                 </div>
               </form>

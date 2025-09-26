@@ -33,31 +33,30 @@ const Mission = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section className="py-12 sm:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         <div 
           ref={headerRef}
-          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 sm:mb-12 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Our Mission
           </h2>
-
         </div>
 
         <div 
           ref={gridRef}
-          className={`grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+          className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
         >
           {missions.map((mission, index) => (
-            <div key={index} className="p-8 text-left rounded-2xl text-white hover:shadow-lg hover-lift transition-all duration-300 group" style={{background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)'}}>
-              <div className="inline-flex items-center justify-center p-4 bg-white rounded-md mb-6 transition-colors duration-300">
+            <div key={index} className="p-4 sm:p-6 lg:p-8 text-left rounded-2xl text-white hover:shadow-lg hover-lift transition-all duration-300 group" style={{background: 'linear-gradient(180deg, #1854C7 0%, #0C2961 100%)'}}>
+              <div className="inline-flex items-center justify-center p-3 sm:p-4 bg-white rounded-md mb-4 sm:mb-6 transition-colors duration-300">
               {mission.icon}
               </div>
-              <h3 className="text-lg font-bold text-white mb-4">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-3 sm:mb-4">
                 {mission.title}
               </h3>
-              <p className="text-white/90 text-xs leading-relaxed">
+              <p className="text-white/90 text-xs sm:text-sm leading-relaxed">
                 {mission.description}
               </p>
             </div>

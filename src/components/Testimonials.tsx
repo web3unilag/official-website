@@ -88,16 +88,16 @@ const Testimonials = () => {
   }, [emblaApi]);
 
   return (
-    <section className="py-20 bg-background overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="py-12 sm:py-16 bg-background overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6">
         <div 
           ref={headerRef}
-          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 sm:mb-12 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             What our Community have to say
           </h2>
-          <p className="text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto px-4">
             Hear from our community members about their transformative experiences
             and career growth in the blockchain industry.
           </p>

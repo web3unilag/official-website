@@ -175,16 +175,16 @@ const Team = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-6">
+    <section className="py-12 sm:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         <div
           ref={headerRef}
-          className={`text-center mb-16 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 sm:mb-12 animate-fade-in-up ${headerInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             Meet our extraordinary team
           </h2>
-          <p className="text-md text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-3xl mx-auto px-4">
             Our diverse team of blockchain experts, educators, and community builders
             are dedicated to advancing web3 adoption across Lagos.
           </p>
@@ -192,7 +192,7 @@ const Team = () => {
 
         <div
           ref={gridRef}
-          className={`grid grid-cols-1 md:grid-cols-2 gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 stagger-children ${gridInView ? 'in-view' : ''}`}
         >
           {teamMembers.map((member, index) => (
             <Card key={index} className="p-4 sm:p-6 text-center hover:shadow-xl hover-lift transition-all duration-300 group border-2 border-[#1954C6] bg-transparent">
