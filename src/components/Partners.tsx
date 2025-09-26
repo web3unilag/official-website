@@ -160,7 +160,7 @@ const Partners = () => {
                   {partners[currentSlide].description}
                 </p>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href={partners[currentSlide].website}
                     target="_blank"

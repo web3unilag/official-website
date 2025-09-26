@@ -41,14 +41,14 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mt-6 sm:mt-8 w-full max-w-md sm:max-w-none">
+          <a href="#programs" className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-6 sm:mt-8 w-full">
             <Button
               size="lg"
-              className="bg-white px-6 py-3 hover:bg-white/90 text-muted font-semibold shadow-lg hover:shadow-xl hover-lift transition-all duration-300 w-full sm:w-auto"
+              className="bg-white px-6 py-3 hover:bg-white/90 text-muted max-w-max font-semibold shadow-lg hover:shadow-xl hover-lift transition-all duration-300 w-full sm:w-auto"
             >
               EXPLORE OUR WORK <ArrowRight className="ml-2" />
             </Button>
-          </div>
+          </a>
         </div>
 
         {/* Statistics Section */}
