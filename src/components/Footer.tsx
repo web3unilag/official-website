@@ -65,7 +65,7 @@ const Footer = () => {
               </a>
               
               <a
-                href="https://discord.gg/web3unilag"
+                href="https://discord.gg/MM9qpmA99T"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 sm:gap-3 text-white hover:text-white/70 transition-colors group w-fit"
