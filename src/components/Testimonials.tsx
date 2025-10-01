@@ -32,7 +32,7 @@ const Testimonials = () => {
       rating: 5,
       x: {
         icons: <FaXTwitter size={24} />,
-        url: 'https://x.com/dp7954',
+        url: 'https://x.com/0xGramps_eth',
       },
     },
     {
@@ -56,7 +56,7 @@ const Testimonials = () => {
       rating: 5,
       x: {
         icons: <FaXTwitter size={24} />,
-        url: 'https://x.com/dp7954',
+        url: 'https://x.com/Hercules_bck',
       },
     },
     {
@@ -80,7 +80,7 @@ const Testimonials = () => {
       rating: 5,
       x: {
         icons: <FaXTwitter size={24} />,
-        url: 'https://x.com/dp7954',
+        url: 'https://x.com/m_zekks',
       },
     },
     {
