@@ -44,7 +44,7 @@ const Testimonials = () => {
       rating: 5,
       x: {
         icons: <FaXTwitter size={24} />,
-        url: 'https://x.com/dp7954',
+        url: 'https://x.com/_heisquadri',
       },
     },
     {
